@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="generator" content=
+  "HTML Tidy for HTML5 for Linux version 5.2.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content=
+  "width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>OpenShift CheatSheet</title>
+  <link rel="stylesheet" href=
+  "https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+  integrity=
+  "sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+  crossorigin="anonymous">
+  <link rel="stylesheet"
+        href="style.css"/>
+</head>
+<body>
+  <script>
+    if('serviceWorker' in navigator) {
+      window.addEventListener('load', function(){
+        navigator.serviceWorker.register('service-worker.js')
+          .then(reg => {
+            console.log('Service worker registered! 😎', reg);
+          }).catch(err => {
+            console.log('😥 Service worker registration failed: ', err);
+          });
+      });
+    }
+  </script>
+  <div class="container">
+    <h1 class="header">OpenShift CheatSheet</h1>
+    <div class="card">
+      <div class="card-body">
+        <h2 class="card-title">General</h2>
+        <div class="card-text">
+          <dl>
+            <dt><code>oc login</code></dt>
+            <dd>Login to OpenShift</dd>
+            <dt><code>oc whoami</code></dt>
+            <dd>Get your openshift username</dd>
+            <dt><code>oc whoami -t</code></dt>
+            <dd>Get your openshift bearer/session-token. It is valid for 24 hours.</dd>
+            <dt><code>oc projects</code></dt>
+            <dd>List available projects</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <h2 class="card-title">Object Types</h2>
+        <div>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="row">Object Type</th>
+                <th scope="row">Abbreviation</th>
+                <th scope="row">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>build</td>
+                <td></td>
+                <td>The process of transforming input parameters into
+                a resulting object. Most often, builds are used to
+                transform source code into a runnable container
+                image.</td>
+              </tr>
+              <tr>
+                <td>buildConfig</td>
+                <td>bc</td>
+                <td>A build configuration, or BuildConfig, is
+                characterized by a build strategy and one or more
+                sources. The strategy determines the aforementioned
+                process, while the sources provide its input.</td>
+              </tr>
+              <tr>
+                <td>deploymentConfig</td>
+                <td>dc</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>imageStream</td>
+                <td>is</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>imageStreamTag</td>
+                <td>istag</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>imageStreamImage</td>
+                <td>isimage</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>event</td>
+                <td>ev</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>node</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>pod</td>
+                <td>po</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>replicationController</td>
+                <td>rc</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>service</td>
+                <td>svc</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>persistentVolume</td>
+                <td>pv</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>persistentVolumeClaim</td>
+                <td>pvc</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <h2 class="card-title">Pod management</h2>
+        <div class="card-text">
+          <dl>
+            <dt><code>oc get pods</code></dt>
+            <dd>Get a list of pods in the project</dd>
+            <dt><code>oc debug &lt;podname&gt;</code></dt>
+            <dd>Start pod <em>&lt;podname&gt;</em> in debug mode</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <h2 class=card-title">Cronjobs</h2>
+        <div class="card-text">
+          <dl>
+            <dt><code>oc get cronjob</code></dt>
+            <dd>List cronjobs in current project</dd>
+            <dt><code>oc edit cronjob &lt;cronjobname&gt;</code></dt>
+            <dd>Edit the cronjob <em>&lt;cronjobname&gt;</em></dd>
+            <dt><code>oc delete cronjob &lt;cronjobname&gt;</code></dt>
+            <dd>Deletes the cronjob <em>&lt;cronjobname&gt;</em></dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <h2 class="card-title">Storage</h2>
+        <div class="card-text">
+          <dl>
+            <dt><code>oc get pvc</code></dt>
+            <dd>Show persistent volume (PV) claims</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <h2 class="card-title">Networking</h2>
+        <div class="card-text">
+          <p>The capabilities of OpenShift's builtin Router are extremely limited. All it can do is basically define a hostname for a service and add ssl (https) encryption to the connection. Any additional router tasks need to be handeled by a separate proxy/router/waf-pod.</p>
+          <dl>
+            <dt><code>oc expose service &lt;service-name&gt;</code></dt>
+            <dd>Creates a route to the service &lt;service-name&gt;</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
