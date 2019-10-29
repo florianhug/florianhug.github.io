@@ -2,9 +2,14 @@
   font-size: 6rem;
   font-weight: bold;
   margin-bottom: 4rem;
+  margin-top: 6rem;
 }
 
 .card{
   margin-top: 1rem;
   margin-bottom: 2rem;
+}
+
+.code-block{
+  white-space: pre-wrap;
 }

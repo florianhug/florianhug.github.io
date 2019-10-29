@@ -162,6 +162,8 @@
           <dl>
             <dt><code>oc get pods</code></dt>
             <dd>Get a list of pods in the project</dd>
+            <dt<code>oc edit pod &lt;podname&gt;</code></dt>
+            <dd>Edit the pod <em>&lt;podname&gt;</em></dd>
             <dt><code>oc debug &lt;podname&gt;</code></dt>
             <dd>Start pod <em>&lt;podname&gt;</em> in debug mode</dd>
           </dl>
@@ -170,7 +172,7 @@
     </div>
     <div class="card">
       <div class="card-body">
-        <h2 class=card-title">Cronjobs</h2>
+        <h2 class="card-title">Cronjobs</h2>
         <div class="card-text">
           <dl>
             <dt><code>oc get cronjob</code></dt>
@@ -203,6 +205,66 @@
             <dt><code>oc expose service &lt;service-name&gt;</code></dt>
             <dd>Creates a route to the service &lt;service-name&gt;</dd>
           </dl>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <h2 class="card-title">Secrets</h2>
+        <div class="card-text">
+          <p>Secrets can be configured locally in a yaml file:</p>
+          <code class="code-block">
+apiVersion: v1
+kind: Secret
+metadata:
+  name: test-secret [1]
+  namespace: my-namespace [2]
+type: Opaque 
+data: [3]
+  username: dmFsdWUtMQ0K 
+  password: dmFsdWUtMg0KDQo=
+stringData: [4] 
+  hostname: myapp.mydomain.com 
+          </code>
+          <dl>
+            <dt>[1]</dt>
+            <dd>Name of the secret</dd>
+            <dt>[2]</dt>
+            <dd>Name of the project</dd>
+            <dt>[3]</dt>
+            <dd>Values in the data section must be Base64 encoded.</dd>
+            <dt>[4]</dt>
+            <dd>Values in the stringData-section are converted to Base64 and then moved to the data section automatically.</dd>
+          </dl>
+          <p>With the project selected the secret can then be added to it with this command: <code>oc create -f secrets.yaml</code></p>
+          <h3 class="card-title">Using secrets in configuration</h3>
+          <p>A secret can be used in a pod or cron configuration. It has to be specifically referenced however.</p>
+          <code class="code-block">
+apiVersion: v1
+kind: Pod
+metadata:
+  name: secret-example-pod
+spec:
+  containers:
+    - name: secret-test-container
+      image: busybox
+      command: [ "/bin/sh", "-c", "export" ]
+      env:
+        - name: TEST_SECRET_USERNAME_ENV_VAR [1]
+          valueFrom:
+            secretKeyRef:
+              name: test-secret [2]
+              key: username [3]
+  restartPolicy: Never             
+          </code>
+          <dl>
+              <dt>[1]</dt>
+              <dd>Name of the environment variable inside the pod</dd>
+              <dt>[2]</dt>
+              <dd>Name of the secret. This has to be the same name as is used in the secret.yaml's metadata-section.</dd>
+              <dt>[3]</dt>
+              <dd>The secrets' key to use.</dd>
+            </dl>
         </div>
       </div>
     </div>
