@@ -207,7 +207,72 @@
           <dl>
             <dt><code>oc expose service &lt;service-name&gt;</code></dt>
             <dd>Creates a route to the service &lt;service-name&gt;</dd>
+            <dt><code>oc get routes</code></dt>
+            <dd>List all routes in the project</dd>
+            <dt><code>oc get route &lt;route-name&gt; -o json</code></dt>
+            <dd>Get the configuration of the route &lt;route-name&gt; in json format.</dd>
+            <dt><code>oc edit route &lt;route-name&gt;</code></dt>
+            <dd>Edit route &lt;route-name&gt;. <em>The host name of a route cannot be changed once it is set.</em></dd>
+            <dt><code>oc delete route &lt;route-name&gt;</code></dt>
+            <dd>Delete route &lt;route-name&gt;.</dd>
+            <dt><code>oc create -f &lt;route-config-file.json&gt;.</code></dt>
+            <dd>Create a route based on the configuration in the file &lt;route-config-file.json&gt;.</dd>
           </dl>
+        </div>
+        <h3>Example of a route config file</h3>
+        <div>
+          <pre class="code">
+            {
+              "apiVersion": "route.openshift.io/v1",
+              "kind": "Route",
+              "metadata": {
+                  "creationTimestamp": "2019-07-12T11:02:19Z",
+                  "labels": {
+                      "app": "web"
+                  },
+                  "name": "post-op",
+                  "namespace": "&lt;project-name&gt;",
+                  "resourceVersion": "20724155",
+                  "selfLink": "/apis/route.openshift.io/v1/namespaces/&lt;project-name&gt;/routes/&lt;route-name&gt;",
+                  "uid": "8440defc-a494-11e9-a858-fa163eed8e5c"
+              },
+              "spec": {
+                  "host": "&lt;hostname&gt;",
+                  "port": {
+                      "targetPort": "8080-tcp"
+                  },
+                  "tls": {
+                      "caCertificate": "-----BEGIN CERTIFICATE-----&lt;ommited&gt;-----END CERTIFICATE-----",
+                      "certificate": "-----BEGIN CERTIFICATE-----&lt;ommited&gt;-----END CERTIFICATE-----",
+                      "insecureEdgeTerminationPolicy": "Redirect",
+                      "key": "-----BEGIN PRIVATE KEY-----&lt;ommited&gt;-----END PRIVATE KEY-----",
+                      "termination": "edge"
+                  },
+                  "to": {
+                      "kind": "Service",
+                      "name": "web",
+                      "weight": 100
+                  },
+                  "wildcardPolicy": "None"
+              },
+              "status": {
+                  "ingress": [
+                      {
+                          "conditions": [
+                              {
+                                  "lastTransitionTime": "2019-07-12T11:02:19Z",
+                                  "status": "True",
+                                  "type": "Admitted"
+                              }
+                          ],
+                          "host": "&lt;hostname&gt;",
+                          "routerName": "router-public",
+                          "wildcardPolicy": "None"
+                      }
+                  ]
+              }
+          }
+        </pre>
         </div>
       </div>
     </div>

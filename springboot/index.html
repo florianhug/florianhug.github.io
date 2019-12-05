@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Spring Boot CheatSheet</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div class="container">
+    <h1 class="header" id="header">Spring Boot CheatSheet</h1>
+    <div class="card">
+      <div class="card-body">
+        <h2 class="card-title">UnitTesting</h2>
+        <div class="card-text">
+          <p>
+            Check for the latest version, download it and extract it into your
+            &tilde;/bin directory.
+          </p>
+          <dl>
+            <dt>@SpringBootTest</dt>
+            <dd>
+              Starts a web environment for unitTesting. Initializes a rest template for http-requests to the controllers.
+            </dd>
+            <dt>@DataJpaTest</dt>
+            <dd>Initializes a H2 database, Hibernate, SpringData and the DataSource.</dd>
+            <dt>@RunWith(SpringRunner.class)</dt>
+            <dd><p>Sets the runner for the test class.</p>
+            <p>Apparently, this is not sufficient for <em>Controller</em>s where <em>@TestConfiguration</em> leads to a cyclic dependecy error.</p></dd>
+          </dl>
+          <h3>@TestConfiguration</h3>
+          <ul>
+            <li>@MockBeans from the surrounding class are usable in the TestConfiguration.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

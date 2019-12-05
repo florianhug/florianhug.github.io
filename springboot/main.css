@@ -21,10 +21,3 @@
 .code-block{
   white-space: pre-wrap;
 }
-
-pre.code{
-  background-color: lightgrey;
-  padding-top: 2em;
-  padding-bottom: 2em;
-  font-weight: bold;
-}
