@@ -167,6 +167,8 @@
             <dd>Edit the pod <em>&lt;podname&gt;</em></dd>
             <dt><code>oc debug &lt;podname&gt;</code></dt>
             <dd>Start pod <em>&lt;podname&gt;</em> in debug mode</dd>
+            <dt><code>oc logs &lt;podname&gt; --tail==&lt;number-of-lines&gt;</code></dt>
+            <dd>Get the last <em>&lt;number-of-lines&gt;</em> lines of logs from pod <em>&lt;podname&gt;</em></dd>
           </dl>
         </div>
       </div>
@@ -210,13 +212,13 @@
             <dt><code>oc get routes</code></dt>
             <dd>List all routes in the project</dd>
             <dt><code>oc get route &lt;route-name&gt; -o json</code></dt>
-            <dd>Get the configuration of the route &lt;route-name&gt; in json format.</dd>
+            <dd>Get the configuration of the route <em>&lt;route-name&gt;</em> in json format.</dd>
             <dt><code>oc edit route &lt;route-name&gt;</code></dt>
-            <dd>Edit route &lt;route-name&gt;. <em>The host name of a route cannot be changed once it is set.</em></dd>
+            <dd>Edit route <em>&lt;route-name&gt;</em>. <em>The host name of a route cannot be changed once it is set.</em></dd>
             <dt><code>oc delete route &lt;route-name&gt;</code></dt>
-            <dd>Delete route &lt;route-name&gt;.</dd>
+            <dd>Delete route <em>&lt;route-name&gt;</em>.</dd>
             <dt><code>oc create -f &lt;route-config-file.json&gt;.</code></dt>
-            <dd>Create a route based on the configuration in the file &lt;route-config-file.json&gt;.</dd>
+            <dd>Create a route based on the configuration in the file <em>&lt;route-config-file.json&gt;</em>.</dd>
           </dl>
         </div>
         <h3>Example of a route config file</h3>
